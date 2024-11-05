@@ -73,7 +73,7 @@ class TextFileProcessor:
                 return "Файл должен содержать ровно два целых числа."
 
 
-text_content = """На севере диком стоит одиноко
+input_text = """На севере диком стоит одиноко
 На голой вершине сосна
 И дремлет качаясь, и снегом сыпучим
 Одета, как ризой, она.
@@ -86,7 +86,7 @@ file_path=os.path.join('11_01.txt')
 dir_file_path=os.path.join('11_01','11_01.txt')
 processor = TextFileProcessor(file_path)
 
-processor.save_text(text_content) # ззапись текста
+processor.save_text(input_text) # ззапись текста
 
 
 print(processor.read_line(3))  # чтение строки
