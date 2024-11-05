@@ -4,8 +4,15 @@ import collections
 def processing(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        try: return func(*args, **kwargs)
-        except Exception as e: print(f'Ошибка вида: {e}.....') #общая обработа ошибок
+        print(f'Начинаем выполнение метода: {func.__name__}')
+        try:
+            result = func(*args, **kwargs)
+            print(f'Метод {func.__name__} выполнен успешно.')
+            return result
+        except Exception as e:
+            print(f'Ошибка вида: {e}')  
+            print(f'Метод {func.__name__} завершился с ошибкой.')  
+            return None 
     return wrapper
 
 class TextFileProcessor:
@@ -49,7 +56,7 @@ class TextFileProcessor:
     @processing
     def save_numbers_to_desktop(numbers):
         numbers_text = " ".join(map(str, numbers))
-        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop", "file_chislo.txt")
+        desktop_path = os.path.join(dir_file_path)
         with open(desktop_path, 'w', encoding='utf-8') as file:
             file.write(numbers_text)
 
@@ -65,9 +72,7 @@ class TextFileProcessor:
             else:
                 return "Файл должен содержать ровно два целых числа."
 
-# Пример использования:
 
-# Задание 1
 text_content = """На севере диком стоит одиноко
 На голой вершине сосна
 И дремлет качаясь, и снегом сыпучим
@@ -81,19 +86,20 @@ file_path=os.path.join('11_01.txt')
 dir_file_path=os.path.join('11_01','11_01.txt')
 processor = TextFileProcessor(file_path)
 
-processor.save_text(text_content)
+processor.save_text(text_content) # ззапись текста
 
-# Примеры других заданий
-print(processor.read_line(3))  # Чтение второй строки
-print(processor.read_lines(2, 4))  # Чтение с первой по третью строки
-print(processor.find_longest_word())  # Самое длинное слово
-print(processor.words_counter())  # Подсчет слов
 
-# Пример удаления стоп-слов
-stop_words = ['и', 'в', 'на', 'как', 'она']  # Пример стоп-слов
-print(processor.remove_stop_words(stop_words))
+print(processor.read_line(3))  # чтение строки
 
-# Задание 7
-numbers = [10, 20]
-TextFileProcessor.save_numbers_to_desktop(numbers)
-print(TextFileProcessor.read_numbers(os.path.join(os.path.expanduser("~"), "Desktop", "file_chislo.txt")))
+print(processor.read_lines(2, 4))  # чтение с _____ по ______ строки
+
+print(processor.find_longest_word())  # самое длинное слово
+
+print(processor.words_counter())  # подсчет слов
+
+
+print(processor.remove_stop_words(['и', 'в']))
+
+
+TextFileProcessor.save_numbers_to_desktop([1,2])
+print(TextFileProcessor.read_numbers(dir_file_path))
