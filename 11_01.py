@@ -15,7 +15,7 @@ def processing(func):
             return None 
     return wrapper
 
-class TextFileProcessor:
+class Text_work:
     def __init__(self, filename):
         self.filename = filename
 
@@ -84,22 +84,22 @@ input_text = """На севере диком стоит одиноко
 
 file_path=os.path.join('11_01.txt')
 dir_file_path=os.path.join('11_01','11_01.txt')
-processor = TextFileProcessor(file_path)
+processor = Text_work(file_path)
 
 processor.save_text(input_text) # ззапись текста
 
 
-print(processor.read_line(3))  # чтение строки
+#print(processor.read_line(3))  # чтение строки
 
-print(processor.read_lines(2, 4))  # чтение с _____ по ______ строки
+#print(processor.read_lines(2, 4))  # чтение с _____ по ______ строки
 
-print(processor.find_longest_word())  # самое длинное слово
+#print(processor.find_longest_word())  # самое длинное слово
 
-print(processor.words_counter())  # подсчет слов
-
-
-print(processor.remove_stop_words(['и', 'в']))
+#print(processor.words_counter())  # подсчет слов
 
 
-TextFileProcessor.save_numbers_to_desktop([1,2])
-print(TextFileProcessor.read_numbers(dir_file_path))
+print(processor.remove_stop_words(['и', 'на']))
+
+
+Text_work.save_numbers_to_desktop([1,2])
+#print(Text_work.read_numbers(dir_file_path))
